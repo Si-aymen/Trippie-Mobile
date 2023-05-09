@@ -101,11 +101,11 @@ public class ServiceCov {
             List<Map<String, Object>> list = (List<Map<String, Object>>) parsedJson.get("root");
             for (Map<String, Object> obj : list) {
                 Cov r = new Cov();
-                // float id = Float.parseFloat(obj.get("id").toString());
+                float id = Float.parseFloat(obj.get("id").toString());
                 r.setDepart((String) obj.get("depart").toString());
                 r.setDestination((String) obj.get("destination").toString());
 
-                // r.setId((int) id);
+                r.setId((int) id);
                 covs.add(r);
             }
         } catch (IOException e) {
@@ -114,62 +114,80 @@ public class ServiceCov {
         return covs;
     }
 
-    /**
-     * public int delete(int id) { cr = new ConnectionRequest();
-     * cr.setUrl(Statics.BASE_URL + "/deleteVoitureJSON/" + id);
-     * System.out.println("url delete : " + cr); cr.setHttpMethod("POST"); //
-     * cr.addArgument("id", String.valueOf(id));
-     *
-     * cr.addResponseListener(new ActionListener<NetworkEvent>() {
-     *
-     * @Override public void actionPerformed(NetworkEvent evt) {
-     * cr.removeResponseListener(this); } });
-     *
-     * try { cr.setDisposeOnCompletion(new
-     * InfiniteProgress().showInfiniteBlocking());
-     * NetworkManager.getInstance().addToQueueAndWait(cr); } catch (Exception e)
-     * { e.printStackTrace(); } return cr.getResponseCode(); }
-     *
-     * public int edit(Voiture v) { return manage(v); }
-     *
-     * public boolean modifier(Voiture v) {
-     *
-     * String url = Statics.BASE_URL + "/updateVoitureJSON/" + v.getId() +
-     * "?matricule=" + v.getMatricule() + "&marque=" + v.getMarque() +
-     * "&puissance=" + v.getPuissance() + "&prix_jours=" + v.getPrix_jours() +
-     * "&picture=" + v.getPicture() + "&energie=" + v.getEnergie() + "&etat=" +
-     * v.getEtat() + "&id_locateur=" + v.getIdlocateur() + "";
-     *
-     * req.setUrl(url);
-     *
-     * req.setHttpMethod("POST");
-     *
-     * req.addResponseListener(new ActionListener<NetworkEvent>() {
-     * @Override public void actionPerformed(NetworkEvent evt) { resultOK =
-     * req.getResponseCode() == 200; // Code HTTP 200 OK
-     * req.removeResponseListener(this); } });
-     * NetworkManager.getInstance().addToQueueAndWait(req); return resultOK; }
-     *
-     * public int manage(Voiture v) {
-     *
-     * cr = new ConnectionRequest();
-     *
-     * cr.setHttpMethod("GET"); cr.setUrl(Statics.BASE_URL +
-     * "/updateVoitureJSON/?id=" + (int) v.getId() + "&matricule=" +
-     * v.getMatricule() + "&marque=" + v.getMarque() + "&puissance=" +
-     * v.getPuissance() + "&prix_jours=" + v.getPrix_jours() + "&picture=" +
-     * v.getPicture() + "&energie=" + v.getEnergie() + "&etat=" + v.getEtat() +
-     * "&id_locateur=" + v.getIdlocateur());
-     *
-     * cr.addArgument("id", String.valueOf(v.getId()));
-     * cr.addResponseListener(new ActionListener<NetworkEvent>() {
-     * @Override public void actionPerformed(NetworkEvent evt) { resultCode =
-     * cr.getResponseCode(); cr.removeResponseListener(this); } }); try {
-     * cr.setDisposeOnCompletion(new InfiniteProgress().showInfiniteBlocking());
-     * NetworkManager.getInstance().addToQueueAndWait(cr); } catch (Exception
-     * ignored) {
-     *
-     * }
-     * return resultCode; }
-     */
+    public int delete(int id) {
+        cr = new ConnectionRequest();
+        cr.setUrl(Statics.BASE_URL + "/deleteCovJSON/" + id);
+        System.out.println("url delete : " + cr);
+        cr.setHttpMethod("POST"); //
+        cr.addArgument("id", String.valueOf(id));
+
+        cr.addResponseListener(new ActionListener<NetworkEvent>() {
+
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                cr.removeResponseListener(this);
+            }
+        });
+
+        try {
+            cr.setDisposeOnCompletion(new InfiniteProgress().showInfiniteBlocking());
+            NetworkManager.getInstance().addToQueueAndWait(cr);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return cr.getResponseCode();
+    }
+
+    public int edit(Cov v) {
+        return manage(v);
+    }
+
+    public boolean modifier(Cov v) {
+
+        String url = Statics.BASE_URL + "/updateCovoiturageJSON/" + v.getId() + "?depart=" + v.getDepart() + "&destination=" + v.getDestination() + "&nmbr_place=" + v.getNbre_place();
+
+        req.setUrl(url);
+
+        req.setHttpMethod("POST");
+
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK
+                        = req.getResponseCode() == 200; // Code HTTP 200 OK
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
+
+    public int manage(Cov v) {
+
+        cr = new ConnectionRequest();
+
+        cr.setHttpMethod("GET");
+        cr.setUrl(Statics.BASE_URL
+                + "/updateCovoiturageJSON/?id=" + (int) v.getId() + "&depart="
+                + v.getDepart() + "&destination=" + v.getDestination() + "&number of seats ="
+                + v.getNbre_place());
+
+        cr.addArgument("id", String.valueOf(v.getId()));
+        cr.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultCode
+                        = cr.getResponseCode();
+                cr.removeResponseListener(this);
+            }
+        });
+        try {
+            cr.setDisposeOnCompletion(new InfiniteProgress().showInfiniteBlocking());
+            NetworkManager.getInstance().addToQueueAndWait(cr);
+        } catch (Exception ignored) {
+
+        }
+        return resultCode;
+    }
+
 }

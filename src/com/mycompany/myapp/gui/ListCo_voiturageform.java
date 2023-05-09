@@ -85,7 +85,7 @@ public class ListCo_voiturageform extends Form {
 
         editBtn.addActionListener(action -> {
             currentV = v;
-            //     new ModifierVoitureLocateur(previous, v).show();
+             new ModifierCo_voiturageChauffeur(previous, v).show();
 
         });
 
@@ -101,8 +101,8 @@ public class ListCo_voiturageform extends Form {
 
             btnConfirm.addActionListener(actionConf -> {
 
-//                ServiceVoiture.getInstance().delete(v.getId());
-//                new ListVoitureform(previous).show();
+                ServiceCov.getInstance().delete(v.getId());
+                new ListCo_voiturageform(previous).show();
             });
 
             Container btnContainer = new Container(new BoxLayout(BoxLayout.X_AXIS));
@@ -118,5 +118,4 @@ public class ListCo_voiturageform extends Form {
 
         return voitureModel;
     }
-
 }
