@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component type="Form" name="GUI 1" cloudDestinationProperty="GUI 1" layout="BoxLayout" boxLayoutAxis="Y" >
+  <component type="Container" name="Container" cloudDestinationProperty="Container" layout="FlowLayout" flowLayoutFillRows="false" flowLayoutAlign="4" flowLayoutValign="4" >
+    <component type="ImageViewer" name="ImageViewer" cloudDestinationProperty="ImageViewer" >
+      <custom name="image" type="com.codename1.ui.Image" value="Group 427319342.jpg" />
+    </component>
+  </component>
+  <component type="Container" name="Container1" cloudDestinationProperty="Container1" uiid="Container" rtl="false" snapToGrid="true" flatten="true" scrollableX="true" scrollableY="false" layout="FlowLayout" flowLayoutFillRows="true" flowLayoutAlign="4" flowLayoutValign="4" >
+    <component type="ImageViewer" name="ImageViewer2" cloudDestinationProperty="ImageViewer2" >
+      <custom name="image" type="com.codename1.ui.Image" value="Gold.png" />
+    </component>
+    <component type="ImageViewer" name="ImageViewer1" cloudDestinationProperty="ImageViewer1" >
+      <custom name="image" type="com.codename1.ui.Image" value="Bronze.png" />
+    </component>
+    <component type="ImageViewer" name="ImageViewer3" cloudDestinationProperty="ImageViewer3" >
+      <custom name="image" type="com.codename1.ui.Image" value="Plat.png" />
+    </component>
+  </component>
+</component>

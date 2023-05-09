@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resource majorVersion="1" minorVersion="11" useXmlUI="false">
+    <image name="Bronze.png"  />
+    <image name="Component 86.png"  />
+    <image name="Gold.png"  />
+    <image name="Group 427319342.jpg"  />
+    <ui name="GUI 1" />
+    <image name="Plat.png"  />
+    <theme name="Theme">
+        <val key="@includeNativeBool" value="true" />
+    </theme>
+</resource>
