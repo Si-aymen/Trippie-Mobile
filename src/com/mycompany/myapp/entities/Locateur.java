@@ -112,6 +112,10 @@ public class Locateur {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public Locateur(int id_loc) {
+        this.id_loc = id_loc;
+    }
     
 
     @Override

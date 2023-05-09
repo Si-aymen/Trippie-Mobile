@@ -28,12 +28,12 @@ public class HomeForm extends Form{
         add(new Label("Choose an option"));
         Button btnAddRole = new Button("Add Role");
         Button btnAddTask = new Button("Sign up");
-        Button btnListTasks = new Button("List of users");
+       
         Button login = new Button("Login");
-        btnAddTask.addActionListener(e-> new AddUtilisateurForm(this).show());
-        btnListTasks.addActionListener(e-> new ListUtilisateursForm(this).show());
+        btnAddTask.addActionListener(e-> new AddUtilisateurForm().show());
+       
         login.addActionListener(e-> new LoginForm(this,res).show());
-        addAll(btnAddTask,btnListTasks,btnAddRole,login);
+        addAll(btnAddTask,btnAddRole,login);
         
         
     }

@@ -50,7 +50,7 @@ public class ServiceRole {
         String libelle = r.getLibelle();
 
         //String url = Statics.BASE_URL + "addRoleJSON/new?id_user=" + id_user + "&libelle=" + libelle;
-        String url = Statics.BASE_URL + "role/addRoleJSON/new" + "/" + u.getId_user() + "/" + libelle;
+        String url = Statics.BASE_URL + "/role/addRoleJSON/new" + "/" + u.getId_user() + "/" + libelle;
         // String url = Statics.BASE_URL + "/new/idUser<\\d+>" ;
 
         req.setUrl(url);

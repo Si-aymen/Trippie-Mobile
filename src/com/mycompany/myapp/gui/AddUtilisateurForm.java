@@ -10,6 +10,7 @@ import com.codename1.ui.Button;
 import com.codename1.ui.Command;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
+import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
@@ -29,11 +30,13 @@ import com.mycompany.myapp.services.ServiceUtilisateur;
  */
 public class AddUtilisateurForm extends BaseForm {
 
-    public AddUtilisateurForm(Form previous) {
-         super(new BorderLayout());
+    public AddUtilisateurForm() {
+        super(new BorderLayout());
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         tb.setUIID("Container");
+        Form previous = Display.getInstance().getCurrent();
+        tb.setBackCommand("", e -> previous.showBack());
         getTitleArea().setUIID("Container");
         //Form previous = Display.getInstance().getCurrent();
         //tb.setBackCommand("", e -> previous.showBack());
@@ -42,12 +45,11 @@ public class AddUtilisateurForm extends BaseForm {
         TextField tfName = new TextField("", "Firstname");
         TextField tfLname = new TextField("", "Lastname");
         Button btnValider = new Button("Add User");
-      
-        
+
         tfCin.setSingleLineTextArea(false);
         tfName.setSingleLineTextArea(false);
         tfLname.setSingleLineTextArea(false);
-       
+
         Container content = BoxLayout.encloseY(
                 new Label("Sign Up", "LogoLabel"),
                 new FloatingHint(tfCin),
@@ -55,12 +57,12 @@ public class AddUtilisateurForm extends BaseForm {
                 new FloatingHint(tfName),
                 createLineSeparator(),
                 new FloatingHint(tfLname),
-                createLineSeparator()       
+                createLineSeparator()
         );
         content.setScrollableY(true);
         add(BorderLayout.CENTER, content);
         add(BorderLayout.SOUTH, BoxLayout.encloseY(
-        FlowLayout.encloseCenter(btnValider)
+                FlowLayout.encloseCenter(btnValider)
         ));
 
         btnValider.addActionListener(new ActionListener() {
@@ -85,10 +87,7 @@ public class AddUtilisateurForm extends BaseForm {
             }
         });
 
-     
-
-       getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> previous.showBack());
-
+        //  getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> previous.showBack());
     }
 
 }

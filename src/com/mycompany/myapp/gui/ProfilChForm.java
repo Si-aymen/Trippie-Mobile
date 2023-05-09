@@ -12,6 +12,7 @@ import com.codename1.ui.CheckBox;
 import com.codename1.ui.Component;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
@@ -32,24 +33,43 @@ import com.mycompany.myapp.services.ServiceChauffeur;
  * @author aymen
  */
 public class ProfilChForm extends BaseForm {
+    public static int ch_id ; 
 
     public ProfilChForm(Resources res, Form previous) {
         super("Profil", BoxLayout.y());
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
+
+        ch_id = SessionManagerChauffeur.getId(); 
         getTitleArea().setUIID("Container");
+        setTitle("Profile");
 
         getContentPane().setScrollVisible(true);
         super.addSideMenu(res);
+        tb.addMaterialCommandToSideMenu("Car Pool", FontImage.MATERIAL_EXIT_TO_APP, e -> {
+            new ListCo_voiturageform(this).show();
+            //System.out.println(SessionManager.getUserName());
+        });
+
         tb.addSearchCommand(e -> {
         });
-        /* Image img = res.getImage("profile-background.jpg");
+        Image img = res.getImage("profile-background.jpg");
         if (img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
             img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
         }
         ScaleImageLabel sl = new ScaleImageLabel(img);
         sl.setUIID("BottomPad");
-        sl.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);*/
+        sl.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
+
+        add(LayeredLayout.encloseIn(
+                sl,
+                BorderLayout.south(
+                        GridLayout.encloseIn(3,
+                                FlowLayout.encloseCenter(
+                                        new Label(res.getImage("profile-pic.jpg"), "PictureWhiteBackgrond"))
+                        )
+                )
+        ));
 
         Button modiff = new Button("Modifier");
         Button Supprimer = new Button("Supprimer");

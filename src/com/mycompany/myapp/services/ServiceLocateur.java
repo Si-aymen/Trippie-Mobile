@@ -58,7 +58,7 @@ public class ServiceLocateur {
         String nom_agence = c.getNom_agence();
 
         //String url = Statics.BASE_URL + "addRoleJSON/new?id_user=" + id_user + "&libelle=" + libelle;
-        String url = Statics.BASE_URL + "locateur/addLocateurJSON/new" + "/" + r.getId_role() + "/" + img + "/" + gsm + "/" + nom_agence + "/" + email + "/" + pass;
+        String url = Statics.BASE_URL + "/locateur/addLocateurJSON/new" + "/" + r.getId_role() + "/" + img + "/" + gsm + "/" + nom_agence + "/" + email + "/" + pass;
         // String url = Statics.BASE_URL + "/new/idUser<\\d+>" ;
 
         req.setUrl(url);
@@ -75,12 +75,12 @@ public class ServiceLocateur {
         return resultOK;
     }
 
-    public void login(Locateur c) {
+    public Locateur login(Locateur c) {
         // construire l'URL de la requête
         String email = c.getEmail();
         String password = c.getPassword();
 
-        String url = Statics.BASE_URL + "locateur/login" + "/" + email + "/" + password;
+        String url = Statics.BASE_URL + "/locateur/login" + "/" + email + "/" + password;
 
         req.setUrl(url);
         req.setPost(true);
@@ -100,7 +100,8 @@ public class ServiceLocateur {
                      
                         String nom_agence = (String) response.get("nom_agence");
                         int id_loc = ((Double) response.get("id_loc")).intValue();
-
+                        Locateur loc = new Locateur(id_loc);
+                        role = loc;
                         System.out.println(id_loc);
 
                         int gsm = ((Double) response.get("gsm")).intValue();
@@ -127,10 +128,11 @@ public class ServiceLocateur {
         // envoyer la requête
         NetworkManager.getInstance()
                 .addToQueueAndWait(req);
+        return role;
     }
     
        public boolean deleteLoc(int id_loc) {
-        String url = Statics.BASE_URL + "locateur/deleteLocJSON" + "/" + (int) id_loc;
+        String url = Statics.BASE_URL + "/locateur/deleteLocJSON" + "/" + (int) id_loc;
 
         req.setUrl(url);
 
@@ -147,11 +149,11 @@ public class ServiceLocateur {
     }
 
     public static void EditLoc(int id, int gsm, String nom_agence,String Email,String Password) {
-        String url = Statics.BASE_URL + "locateur/editLocJson" + "/" + id + "/" + gsm + "/" + nom_agence + "/" + Email + "/" + Password;
+        String url = Statics.BASE_URL + "/locateur/editLocJson" + "/" + id + "/" + gsm + "/" + nom_agence + "/" + Email + "/" + Password;
         MultipartRequest req = new MultipartRequest();
         req.setUrl(url);
         req.setPost(true);
-        req.addArgument("id_ch", String.valueOf(SessionManagerLocateur.getId()));
+        req.addArgument("id_loc", String.valueOf(SessionManagerLocateur.getId()));
         req.addArgument("gsm", String.valueOf(gsm));
         req.addArgument("nom_agence", nom_agence);
         req.addArgument("email", Email);

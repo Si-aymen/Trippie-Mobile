@@ -63,7 +63,7 @@ public class ServiceClient {
         String pass = c.getPassword();
 
         //String url = Statics.BASE_URL + "addRoleJSON/new?id_user=" + id_user + "&libelle=" + libelle;
-        String url = Statics.BASE_URL + "client/addClientJSON/new" + "/" + r.getId_role() + "/" + img + "/" + gsm + "/" + email + "/" + pass;
+        String url = Statics.BASE_URL + "/client/addClientJSON/new" + "/" + r.getId_role() + "/" + img + "/" + gsm + "/" + email + "/" + pass;
         // String url = Statics.BASE_URL + "/new/idUser<\\d+>" ;
 
         req.setUrl(url);
@@ -85,7 +85,7 @@ public class ServiceClient {
         String email = c.getEmail();
         String password = c.getPassword();
 
-        String url = Statics.BASE_URL + "client/login" + "/" + email + "/" + password;
+        String url = Statics.BASE_URL + "/client/login" + "/" + email + "/" + password;
 
         req.setUrl(url);
         req.setPost(true);
@@ -131,7 +131,7 @@ public class ServiceClient {
     }
 
     public boolean deleteCli(int id_client) {
-        String url = Statics.BASE_URL + "client/deleteCliJSON" + "/" + (int) id_client;
+        String url = Statics.BASE_URL + "/client/deleteCliJSON" + "/" + (int) id_client;
 
         req.setUrl(url);
 
@@ -148,11 +148,11 @@ public class ServiceClient {
     }
 
     public static void EditCli(int id, int gsm, String Email, String Password) {
-        String url = Statics.BASE_URL + "client/editCliJson" + "/" + id + "/" + gsm + "/" + Email + "/" + Password;
+        String url = Statics.BASE_URL + "/client/editCliJson" + "/" + id + "/" + gsm + "/" + Email + "/" + Password;
         MultipartRequest req = new MultipartRequest();
         req.setUrl(url);
         req.setPost(true);
-        req.addArgument("id_ch", String.valueOf(SessionManagerClient.getId()));
+        req.addArgument("id_client", String.valueOf(SessionManagerClient.getId()));
         req.addArgument("gsm", String.valueOf(gsm));
         req.addArgument("email", Email);
         req.addArgument("password", Password);
@@ -173,7 +173,7 @@ public class ServiceClient {
 
     public void sms(TextField gsm, Resources rs) {
 
-        String url = Statics.BASE_URL + "client/forget" + "/" + gsm.getText();
+        String url = Statics.BASE_URL + "/client/forget" + "/" + gsm.getText();
         req.setUrl(url);
         req.setPost(true);
 
@@ -189,21 +189,6 @@ public class ServiceClient {
         NetworkManager.getInstance()
                 .addToQueueAndWait(req);
 
-    }
-
-    public void getImage() {
-        int id = SessionManagerClient.getId();
-        String url = "http://localhost:8000/utilisateur/mobile/client/img/" + id;
-        ConnectionRequest connectionRequest = new ConnectionRequest() {
-            @Override
-            protected void readResponse(InputStream input) throws IOException {
-                // Récupérer l'image sous forme de flux
-                Image image = Image.createImage(input);
-
-            }
-        };
-        connectionRequest.setUrl(url);
-        NetworkManager.getInstance().addToQueue(connectionRequest);
     }
 
 }

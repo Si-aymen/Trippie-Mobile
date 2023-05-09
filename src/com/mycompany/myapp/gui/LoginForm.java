@@ -58,7 +58,7 @@ public class LoginForm extends BaseForm {
         //mp oublié
         Button mp = new Button("oublier mot de passe?", "CenterLabel");
 
-        signUp.addActionListener(e -> new AddUtilisateurForm(previous).show());
+        signUp.addActionListener(e -> new AddUtilisateurForm().show());
         signUp.setUIID("Link");
         Label doneHaveAnAccount = new Label("Vous n'avez aucune compte?");
 
@@ -89,7 +89,7 @@ public class LoginForm extends BaseForm {
                 clientForm.show();
             } else if (userTypeComboBox.getSelectedItem().equals("Landlord")) {
                 Locateur loc = new Locateur(username, password);
-                ServiceLocateur.getInstance().login(loc);
+                Locateur loc2 =ServiceLocateur.getInstance().login(loc);
 
                 ProfilLocForm locForm = new ProfilLocForm(res, previous);
                 locForm.show();

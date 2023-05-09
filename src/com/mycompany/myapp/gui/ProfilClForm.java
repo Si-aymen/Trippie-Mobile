@@ -12,6 +12,7 @@ import com.codename1.ui.CheckBox;
 import com.codename1.ui.Component;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
@@ -43,7 +44,10 @@ public class ProfilClForm extends BaseForm {
 
         getContentPane().setScrollVisible(true);
         super.addSideMenu(res);
-
+        tb.addMaterialCommandToSideMenu("Cars", FontImage.MATERIAL_EXIT_TO_APP, e -> {
+            new ListVoitureform(this).show();
+            //System.out.println(SessionManager.getUserName());
+        });
         tb.addSearchCommand(e -> {
         });
         Image img = res.getImage("profile-background.jpg");

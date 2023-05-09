@@ -57,7 +57,7 @@ public class ServiceChauffeur {
         String num_permis = c.getNum_permis();
 
         //String url = Statics.BASE_URL + "addRoleJSON/new?id_user=" + id_user + "&libelle=" + libelle;
-        String url = Statics.BASE_URL + "chauffeur/addChauffeurJSON/new" + "/" + r.getId_role() + "/" + img + "/" + gsm + "/" + num_permis + "/" + email + "/" + pass;
+        String url = Statics.BASE_URL + "/chauffeur/addChauffeurJSON/new" + "/" + r.getId_role() + "/" + img + "/" + gsm + "/" + num_permis + "/" + email + "/" + pass;
         // String url = Statics.BASE_URL + "/new/idUser<\\d+>" ;
 
         req.setUrl(url);
@@ -79,7 +79,7 @@ public class ServiceChauffeur {
         String email = c.getEmail();
         String password = c.getPassword();
 
-        String url = Statics.BASE_URL + "chauffeur/login" + "/" + email + "/" + password;
+        String url = Statics.BASE_URL + "/chauffeur/login" + "/" + email + "/" + password;
 
         req.setUrl(url);
         req.setPost(true);
@@ -127,7 +127,7 @@ public class ServiceChauffeur {
     }
 
     public boolean deleteCh(int id_ch) {
-        String url = Statics.BASE_URL + "chauffeur/deleteChJSON" + "/" + (int) id_ch;
+        String url = Statics.BASE_URL + "/chauffeur/deleteChJSON" + "/" + (int) id_ch;
 
         req.setUrl(url);
 
@@ -144,7 +144,7 @@ public class ServiceChauffeur {
     }
 
     public static void EditCh(int id, int gsm, String Num_permis,String Email,String Password) {
-        String url = Statics.BASE_URL + "chauffeur/editChJson" + "/" + id + "/" + gsm + "/" + Num_permis + "/" + Email + "/" + Password;
+        String url = Statics.BASE_URL + "/chauffeur/editChJson" + "/" + id + "/" + gsm + "/" + Num_permis + "/" + Email + "/" + Password;
         MultipartRequest req = new MultipartRequest();
         req.setUrl(url);
         req.setPost(true);

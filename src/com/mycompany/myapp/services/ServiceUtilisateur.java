@@ -47,7 +47,7 @@ public class ServiceUtilisateur {
         String cin = u.getCin();
         String name = u.getNom();
         String lname = u.getPrenom();
-        String url = Statics.BASE_URL + "addUtilisateurJSON/new" + "/" + cin + "/" + name + "/" + lname;
+        String url = Statics.BASE_URL + "/addUtilisateurJSON/new" + "/" + cin + "/" + name + "/" + lname;
         req.setUrl(url);
         req.setPost(false);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
@@ -72,49 +72,8 @@ public class ServiceUtilisateur {
         return user;
     }
 
-    public ArrayList<Utilisateur> parseUsers(String jsonText) {
-        try {
-            users = new ArrayList<>();
-            JSONParser j = new JSONParser();
-            Map<String, Object> tasksListJson
-                    = j.parseJSON(new CharArrayReader(jsonText.toCharArray()));
+   
 
-            List<Map<String, Object>> list = (List<Map<String, Object>>) tasksListJson.get("root");
-            for (Map<String, Object> obj : list) {
-                Utilisateur u = new Utilisateur();
-                float id = Float.parseFloat(obj.get("id_user").toString());
-
-                if (obj.get("cin") == null || obj.get("nom") == null || obj.get("prenom") == null) {
-                    u.setCin("null");
-                    u.setNom("null");
-                    u.setPrenom("null");
-                } else {
-                    u.setCin(obj.get("cin").toString());
-                    u.setNom(obj.get("nom").toString());
-                    u.setPrenom(obj.get("prenom").toString());
-                }
-                users.add(u);
-            }
-
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return users;
-    }
-
-    public ArrayList<Utilisateur> getAllUsers() {
-        String url = Statics.BASE_URL + "AllUsers";
-        req.setUrl(url);
-        req.setPost(false);
-        req.addResponseListener(new ActionListener<NetworkEvent>() {
-            @Override
-            public void actionPerformed(NetworkEvent evt) {
-                users = parseUsers(new String(req.getResponseData()));
-                req.removeResponseListener(this);
-            }
-        });
-        NetworkManager.getInstance().addToQueueAndWait(req);
-        return users;
-    }
+   
 
 }

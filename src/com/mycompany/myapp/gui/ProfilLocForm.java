@@ -6,9 +6,11 @@
 package com.mycompany.myapp.gui;
 
 import com.codename1.components.InfiniteProgress;
+import com.codename1.components.ScaleImageLabel;
 import com.codename1.ui.Button;
 import com.codename1.ui.Component;
 import com.codename1.ui.Dialog;
+import com.codename1.ui.Display;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
@@ -17,15 +19,20 @@ import com.codename1.ui.Toolbar;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.layouts.GridLayout;
+import com.codename1.ui.layouts.LayeredLayout;
+import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
+import com.mycompany.myapp.entities.Locateur;
 import java.io.IOException;
-
 
 /**
  *
  * @author aymen
  */
-public class ProfilLocForm extends Form {
+public class ProfilLocForm extends BaseForm {
+    
 
     public ProfilLocForm(Resources res, Form previous) {
         super("Profil", BoxLayout.y());
@@ -33,19 +40,32 @@ public class ProfilLocForm extends Form {
         setToolbar(tb);
 
         getTitleArea().setUIID("Container");
+        setTitle("Profile");
 
         getContentPane().setScrollVisible(true);
+        super.addSideMenu(res);
 
         tb.addSearchCommand(e -> {
         });
-
-        /*        Image img = res.getImage("profile-background.jpg");
-        if(img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
+        Image img = res.getImage("profile-background.jpg");
+        if (img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
             img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
         }
-        ScaleImageLabel sl = new ScaleImageLabel(img);*/
- /* sl.setUIID("BottomPad");
-        sl.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);*/
+        ScaleImageLabel sl = new ScaleImageLabel(img);
+        sl.setUIID("BottomPad");
+        sl.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
+
+        add(LayeredLayout.encloseIn(
+                sl,
+                BorderLayout.south(
+                        GridLayout.encloseIn(3,
+                                FlowLayout.encloseCenter(
+                                        new Label(res.getImage("profile-pic.jpg"), "PictureWhiteBackgrond"))
+                        )
+                )
+        ));
+        
+        //System.out.println("id locateu "+loc.getId_loc());
         Button modiff = new Button("Modifier");
         Button Supprimer = new Button("Supprimer");
 
@@ -65,23 +85,19 @@ public class ProfilLocForm extends Form {
                 )
         ));*/
         // Récupérez l'image de session
-      
         TextField nom_agence = new TextField(SessionManagerLocateur.getNomAgence(), "Agency name", 20, TextField.ANY);
         nom_agence.setUIID("TextFieldBlack");
         addStringValue("Agency name", nom_agence);
-        System.out.println(nom_agence); 
-        
-        TextField Gsm = new TextField(String.valueOf(SessionManagerLocateur.getGsm()),"Gsm",20, TextField.ANY);
+        System.out.println(nom_agence);
+
+        TextField Gsm = new TextField(String.valueOf(SessionManagerLocateur.getGsm()), "Gsm", 20, TextField.ANY);
         Gsm.setUIID("TextFieldBlack");
         addStringValue("Gsm", Gsm);
-       
 
         TextField Email = new TextField(SessionManagerLocateur.getEmail(), "E-Mail", 20, TextField.EMAILADDR);
         Email.setUIID("TextFieldBlack");
         addStringValue("E-Mail", Email);
-        
-         
-        
+
         TextField Password = new TextField(SessionManagerLocateur.getPassowrd(), "Password", 20, TextField.PASSWORD);
         Password.setUIID("TextFieldBlack");
         addStringValue("Password", Password);
