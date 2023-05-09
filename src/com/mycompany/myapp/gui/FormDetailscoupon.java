@@ -8,6 +8,7 @@ package com.mycompany.myapp.gui;
 import com.codename1.components.ImageViewer;
 import com.codename1.components.MultiButton;
 import com.codename1.ui.Button;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
@@ -42,7 +43,19 @@ public class FormDetailscoupon extends Form{
             if(t.getId()==a){
             addElement(t);
             add(new Label(" "));
+            Button btn = new Button( "modifier");
+            Button btn1 = new Button( "supprimer");
+             
+            btn.addActionListener(e ->{ new FormModifierCoupon(this,t).show() ;});
+            btn1.addActionListener(e ->{  ServiceCoupon.getInstance().supprimer(t);
+            Dialog.show("Salut", "coupon supprimer avec succes", "OK", null);
+            previeus.showBack();
+             });
+                add(btn);
+                add(btn1);
+            
         } }
+        
         
         
         

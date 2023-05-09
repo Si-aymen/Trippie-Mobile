@@ -262,5 +262,69 @@ public void ajouterCoupon(Coupon coupon) {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return Stations;
     }
+    
+    
+    
+    
+      public boolean deleteCoupon(int id) {
+        // Create the URL for the delete request
+        String url = "http://your-api-url/deletecouponJSON/" + id;
+
+        // Create the ConnectionRequest
+        ConnectionRequest request = new ConnectionRequest();
+        request.setUrl(url);
+        request.setHttpMethod("DELETE");
+
+        // Add a response listener to handle the server's response
+        request.addResponseListener(e -> {
+            NetworkEvent networkEvent = (NetworkEvent) e;
+            int responseCode = networkEvent.getResponseCode();
+
+            if (responseCode == 200) {
+                // Deletion successful
+                System.out.println("Coupon deleted successfully");
+            } else {
+                // Deletion failed
+                System.out.println("Failed to delete coupon");
+            }
+        });
+
+        // Send the request
+        NetworkManager.getInstance().addToQueueAndWait(request);
+
+        // Check if the deletion was successful
+        int responseCode = request.getResponseCode();
+        return responseCode == 200;
+    }
+      //http://127.0.0.1:8000/updatecouponJSON/6?date_debut=2023-05-05&date_expiratio=2023-05-01&taux=10&code_coupon=rimouta&nbr_utilisation=7&type=vip
+      
+      public boolean modifierReservationExcursion(Coupon Reservation) {
+        String url = Statics.BASE_URL +"/updatecouponJSON/"+Reservation.getId()+"?date_debut="+Reservation.getDate_debut()+"&date_expiratio="+Reservation.getDate_expiratio()
+                +"&taux="+Reservation.getTaux()+"&code_coupon="+Reservation.getCode_coupon()+"&nbr_utilisation="+Reservation.getNbr_utilisation()+"&type="+Reservation.getType();
+        req.setUrl(url);
+        System.out.println(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                result = req.getResponseCode() == 200
+;  // Code response Http 200 ok
+                req.removeResponseListener(this);
+            }
+        });
+        
+    NetworkManager.getInstance().addToQueueAndWait(req);//execution ta3 request sinon yet3ada chy dima nal9awha
+    return result;
+      }
+      
+      public void supprimer(Coupon coupon){
+          req = new ConnectionRequest();
+          req.setInsecure(true);
+          this.req.setUrl(Statics.BASE_URL+"/deletecouponJSON/"+coupon.getId());
+          this.req.setHttpMethod("DELETE");
+          NetworkManager.getInstance().addToQueue(req);
+          
+          
+      }
+      
 
 }
