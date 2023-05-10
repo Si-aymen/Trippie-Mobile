@@ -12,12 +12,14 @@ import com.codename1.ui.util.UIBuilder;
 import com.mycompany.myapp.entities.Coupon;
 import com.mycompany.myapp.services.ServiceCoupon;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class listcoupon extends Form {
    public listcoupon(Form previeus){
         getAllStyles().setBgColor(0xebfff8);
         UIBuilder.registerCustomComponent("ImageViewer", ImageViewer.class);
-        setTitle("Nos coupons");
+        setTitle("our Copons");
         //UIBuilder uib1 =new UIBuilder();
         //setLayout(new FlowLayout(CENTER, CENTER));
         setLayout(BoxLayout.y());
@@ -26,14 +28,14 @@ public class listcoupon extends Form {
 //        sp.setText(ServiceStation.getInstance().getAllStations().toString());
 //        add(sp);
 
-TextField searchField = new TextField("", "Nom de l'événement");
-Button searchButton = new Button("Rechercher");
+TextField searchField = new TextField("", "coupon Code");
+Button searchButton = new Button("Search");
 add(searchField);
 add(searchButton);
 searchButton.addActionListener(e -> {
     String searchText = searchField.getText();
     ArrayList<Coupon> filteredEvents = new ArrayList<>();
-ArrayList<Coupon> tasks1 = ServiceCoupon.getInstance().getAllStations();
+    ArrayList<Coupon> tasks1 = ServiceCoupon.getInstance().getAllStations();
     for (Coupon ev : tasks1) {
         if (ev.getCode_coupon().toLowerCase().contains(searchText.toLowerCase())) {
             filteredEvents.add(ev);
@@ -41,16 +43,16 @@ ArrayList<Coupon> tasks1 = ServiceCoupon.getInstance().getAllStations();
     }
 
     // Create a new form to display the search results
-    Form searchResultsForm = new Form("Résultats de recherche", new BoxLayout(BoxLayout.Y_AXIS));
+    Form searchResultsForm = new Form("search result", new BoxLayout(BoxLayout.Y_AXIS));
 
     if (filteredEvents.isEmpty()) {
-        searchResultsForm.add(new Label("Aucun événement trouvé"));
+        searchResultsForm.add(new Label("no coupons "));
     } else {
       for (Coupon ev : filteredEvents) {
     // Add the event details to the form
-    Label nameLabel = new Label("Code coupon : " + ev.getCode_coupon());
+    Label nameLabel = new Label("copon code : " + ev.getCode_coupon());
     Label locationLabel = new Label("type : " + ev.getType());
-    Label availablePlacesLabel = new Label("nbr : " + ev.getNbr_utilisation());
+    Label availablePlacesLabel = new Label("number : " + ev.getNbr_utilisation());
 
     // Add the labels to the form
     searchResultsForm.add(nameLabel);
@@ -65,7 +67,38 @@ ArrayList<Coupon> tasks1 = ServiceCoupon.getInstance().getAllStations();
 });
 
 
-        Button btnValider = new Button("Ajouter un coupon");
+Button trierButton = new Button("Trier");
+add(trierButton);
+
+trierButton.addActionListener(e -> {
+     ArrayList<Coupon> tasks2 = ServiceCoupon.getInstance().getAllStations();
+    // Trier les événements par ordre alphabétique croissant en fonction de leur nom d'événement
+    Collections.sort(tasks2, new Comparator<Coupon>() {
+        @Override
+        public int compare(Coupon event1, Coupon event2) {
+            return event1.getCode_coupon().compareToIgnoreCase(event2.getCode_coupon());
+        }
+    });
+
+    // Afficher la liste triée des événements
+    Form triResultsForm = new Form("sort ", new BoxLayout(BoxLayout.Y_AXIS));
+    for (Coupon za  : tasks2) {
+        Label eventLabel = new Label(za.getCode_coupon());
+        Label eventLabel1 = new Label(za.getType());
+          Label availablePlacesLabel = new Label("number of users : " + za.getNbr_utilisation());
+
+        triResultsForm.add(eventLabel);
+        triResultsForm.add(eventLabel1);
+        triResultsForm.add(availablePlacesLabel);
+    }
+    triResultsForm.show();
+});
+
+
+
+
+
+        Button btnValider = new Button("coupon Added");
         //btnValider.setUIID("LoginButton");
         btnValider.addActionListener(e -> {
             new AddCouponForm(this).show();
@@ -94,9 +127,9 @@ ArrayList<Coupon> tasks1 = ServiceCoupon.getInstance().getAllStations();
         });
         //setUIID("CompletedTasks");
         add(sp);
-        add(new Label("salem"+task.getDate_debut()));
-        add(new Label("salem"+task.getDate_expiratio()));
-        add(new Label("le "+task.getNbr_utilisation()));
+        add(new Label(""+task.getDate_debut()));
+        add(new Label(""+task.getDate_expiratio()));
+        add(new Label("the number of user is "+task.getNbr_utilisation()));
         add(new Label(""+task.getTaux()));
         add(new Label("   "));
    

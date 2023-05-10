@@ -12,9 +12,7 @@ import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
 import com.mycompany.myapp.entities.Coupon;
 import com.mycompany.myapp.services.ServiceCoupon;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Random;
 
 public class AddCouponForm extends Form {
 
@@ -44,6 +42,12 @@ public class AddCouponForm extends Form {
         tfType = new TextField("", "Type");
 
         Button btnAddCoupon = new Button("Add Coupon");
+        Button btnGenerateCode = new Button("Generate Code");
+
+        btnGenerateCode.addActionListener(e -> {
+            String generatedCode = generateRandomCouponCode();
+            tfCodeCoupon.setText(generatedCode);
+        });
 
         btnAddCoupon.addActionListener(new ActionListener() {
             @Override
@@ -53,28 +57,75 @@ public class AddCouponForm extends Form {
         });
 
         addAll(lblDateDebut, tfDateDebut, lblDateExpiration, tfDateExpiration, lblTaux, tfTaux,
-                lblCodeCoupon, tfCodeCoupon, lblNbrUtilisation, tfNbrUtilisation, lblType, tfType, btnAddCoupon);
+                lblCodeCoupon, tfCodeCoupon, lblNbrUtilisation, tfNbrUtilisation, lblType, tfType,
+                btnGenerateCode, btnAddCoupon);
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> previous.showBack());
     }
 
-   private void addNewCoupon() {
-    String dateDebutString = tfDateDebut.getText();
-    String dateExpirationString = tfDateExpiration.getText();
-    int taux = Integer.parseInt(tfTaux.getText().trim());
-    String codeCoupon = tfCodeCoupon.getText().trim();
-    int nbrUtilisation = Integer.parseInt(tfNbrUtilisation.getText().trim());
-    String type = tfType.getText().trim();
+    private void addNewCoupon() {
+        String dateDebutString = tfDateDebut.getText();
+        String dateExpirationString = tfDateExpiration.getText();
+        int taux = Integer.parseInt(tfTaux.getText().trim());
+        String codeCoupon = tfCodeCoupon.getText().trim();
+        int nbrUtilisation = Integer.parseInt(tfNbrUtilisation.getText().trim());
+        String type = tfType.getText().trim();
 
-    //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    String dateDebut= "";
-    String dateExpiration="";
+        // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String dateDebut = "";
+        String dateExpiration = "";
+
+        if (codeCoupon.isEmpty()) {
+        Dialog.show("Error", "Please enter a code coupon", "OK", null);
+        return;
+    }
+         // Validate taux
+    try {
+        taux = Integer.parseInt(tfTaux.getText().trim());
+        if (taux <= 0) {
+            Dialog.show("Error", "Taux must be a positive integer", "OK", null);
+            return;
+        }
+    } catch (NumberFormatException e) {
+        Dialog.show("Error", "Invalid value for Taux", "OK", null);
+        return;
+    }
+
+     // Validate nbrUtilisation
+    try {
+        nbrUtilisation = Integer.parseInt(tfNbrUtilisation.getText().trim());
+        if (nbrUtilisation < 0) {
+            Dialog.show("Error", "Nombre d'utilisation must be a non-negative integer", "OK", null);
+            return;
+        }
+    } catch (NumberFormatException e) {
+        Dialog.show("Error", "Invalid value for Nombre d'utilisation", "OK", null);
+        return;
+    }
     
+         // Validate type
+    if (!type.equalsIgnoreCase("vip") && !type.equalsIgnoreCase("simple")) {
+        Dialog.show("Error", "Type must be either 'VIP' or 'Simple'", "OK", null);
+        return;
+    }
+        
+        Coupon coupon = new Coupon(dateDebut, dateExpiration, taux, codeCoupon, nbrUtilisation, type);
 
+        ServiceCoupon.getInstance().ajouterCoupon(coupon);
 
-    Coupon coupon = new Coupon(dateDebut, dateExpiration, taux, codeCoupon, nbrUtilisation, type);
+        Dialog.show("Success", "Coupon added successfully", new Command("OK"));
+    }
 
-    ServiceCoupon.getInstance().ajouterCoupon(coupon);
+   private String generateRandomCouponCode() {
+    String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    StringBuilder sb = new StringBuilder();
+    Random random = new Random();
+    int codeLength = 6;
 
-    Dialog.show("Success", "Coupon added successfully", new Command("OK"));
-}
-}
+    for (int i = 0; i < codeLength; i++) {
+        int randomIndex = random.nextInt(characters.length());
+        char randomChar = characters.charAt(randomIndex);
+        sb.append(randomChar);
+    }
+
+    return sb.toString();
+}}
