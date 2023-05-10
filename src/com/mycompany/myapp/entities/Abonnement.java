@@ -16,20 +16,24 @@ import java.util.Date;
  * @author mtirn
  */
 
-public class abonnement  implements Serializable {
+public class Abonnement  {
     private int idA ;
     private String type;
     private Date dateExpiration , dateAchat ;
     private int prix;
 
-    public abonnement() {
+    public Abonnement(int prix) {
+        this.prix = prix;
+    }
+
+    public Abonnement() {
     }
 // Constructor with type parameter
-    public abonnement(String type) {
+    public Abonnement(String type) {
         setType(type);
         setPrix(type);
     }
-    public abonnement(int idA, String type, Date dateExpiration, Date dateAchat, int prix) {
+    public Abonnement(int idA, String type, Date dateExpiration, Date dateAchat, int prix) {
         this.idA = idA;
         this.type = type;
         this.dateExpiration = dateExpiration;
@@ -37,14 +41,14 @@ public class abonnement  implements Serializable {
         this.prix = prix;
     }
 
-    public abonnement(String type, Date dateExpiration, Date dateAchat, int prix) {
+    public Abonnement(String type, Date dateExpiration, Date dateAchat, int prix) {
         this.type = type;
         this.dateExpiration = dateExpiration;
         this.dateAchat = dateAchat;
         this.prix = prix;
     }
 
-    public abonnement(String type,int prix, Date dateAchat, Date dateExpiration) {
+    public Abonnement(String type,int prix, Date dateAchat, Date dateExpiration) {
         this.type = type;
           this.prix = prix;
                   this.dateAchat = dateAchat;
@@ -52,19 +56,19 @@ public class abonnement  implements Serializable {
         this.dateExpiration = dateExpiration;
       
     }
-    public abonnement(String type, Date dateExpiration, Date dateAchat) {
+    public Abonnement(String type, Date dateExpiration, Date dateAchat) {
         this.type = type;
         this.dateExpiration = dateExpiration;
         this.dateAchat = dateAchat;
     }
 
-    public abonnement(String type, int prix) {
+    public Abonnement(String type, int prix) {
         this.type = type;
         this.prix = prix;
     }
     
 
-    public abonnement(Date dateExpiration, Date dateAchat) {
+    public Abonnement(Date dateExpiration, Date dateAchat) {
         this.dateExpiration = dateExpiration;
         this.dateAchat = dateAchat;
     }
@@ -119,6 +123,7 @@ public class abonnement  implements Serializable {
                 this.prix = 0;
                 break;
         }
+        
     }
 
     public int getIdA() {

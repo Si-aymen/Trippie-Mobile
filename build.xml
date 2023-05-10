@@ -60,6 +60,7 @@
             target="1.8"
             bootclasspath="lib/CLDC11.jar" excludes="${excludes}"
             classpath="${javac.classpath}:${build.classes.dir}">
+
             <src path="${src.dir}"/>
         </javac>        
     </target>

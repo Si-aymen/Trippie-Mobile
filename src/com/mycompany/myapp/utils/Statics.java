@@ -9,7 +9,7 @@ package com.mycompany.myapp.utils;
  *
  * @author mtirn
  */
-public class statics {
+public class Statics {
     
     
     public static final String BASE_URL="http://127.0.0.1:8000";
