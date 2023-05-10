@@ -38,8 +38,6 @@ public class AddUtilisateurForm extends BaseForm {
         Form previous = Display.getInstance().getCurrent();
         tb.setBackCommand("", e -> previous.showBack());
         getTitleArea().setUIID("Container");
-        //Form previous = Display.getInstance().getCurrent();
-        //tb.setBackCommand("", e -> previous.showBack());
         setUIID("Activate");
         TextField tfCin = new TextField("", "Cin");
         TextField tfName = new TextField("", "Firstname");
@@ -68,10 +66,15 @@ public class AddUtilisateurForm extends BaseForm {
         btnValider.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                if ((tfName.getText().length() == 0)) {
-                    Dialog.show("Alert", "Please fill all the fields", new Command("OK"));
+                if (tfName.getText().length() == 0) {
+                    Dialog.show("Alert", "Firstname is empty", new Command("OK"));
+                } else if (tfLname.getText().length() == 0) {
+                    Dialog.show("Alert", "Lastname is empty", new Command("OK"));
+                } else if (tfCin.getText().length() == 0) {
+                    Dialog.show("Alert", "Cin is empty", new Command("OK"));
+                } else if (tfCin.getText().length() != 8) {
+                    Dialog.show("Alert", "Cin must contain 8 numbers", new Command("OK"));
                 } else {
-
                     Utilisateur u = new Utilisateur(tfCin.getText().toString(), tfName.getText().toString(), tfLname.getText().toString());
                     Utilisateur addedUser = ServiceUtilisateur.getInstance().addUtilisateurJSON(u);
                     if (addedUser != null) {
@@ -81,13 +84,10 @@ public class AddUtilisateurForm extends BaseForm {
                     } else {
                         Dialog.show("ERROR", "Server error", new Command("OK"));
                     }
-
                 }
-
             }
-        });
-
-        //  getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> previous.showBack());
+        }
+        );
     }
 
 }

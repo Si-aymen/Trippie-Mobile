@@ -25,7 +25,7 @@ public class ListVoitureform extends Form {
         addGUIs();
 
         super.getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> previous.showBack());
-        super.getToolbar().addMaterialCommandToRightBar("", FontImage.MATERIAL_ARROW_BACK, e -> new AddCarLocateurForm(previous, l).show());
+        super.getToolbar().addMaterialCommandToRightBar("", FontImage.MATERIAL_ADD, e -> new AddCarLocateurForm(previous, l).show());
     }
 
     public void refresh() {

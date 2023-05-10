@@ -10,6 +10,7 @@ import com.codename1.components.FloatingHint;
 import static com.codename1.ui.BrowserComponent.onError;
 import com.codename1.ui.Button;
 import com.codename1.ui.ComboBox;
+import com.codename1.ui.Command;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
@@ -47,7 +48,7 @@ public class LoginForm extends BaseForm {
         setUIID("SignIn");
 
         // add(BorderLayout.NORTH, new Label(res.getImage("Logo.png"), "LogoLabel"));
-        TextField Email = new TextField("", "Email", 20, TextField.ANY);
+        TextField Email = new TextField("", "Email", 20, TextField.EMAILADDR);
         TextField Password = new TextField("", "Password", 20, TextField.PASSWORD);
         ComboBox<String> userTypeComboBox = new ComboBox<>("Customer", "Landlord", "Driver");
         Email.setSingleLineTextArea(false);
@@ -81,28 +82,32 @@ public class LoginForm extends BaseForm {
             String username = Email.getText();
             String password = Password.getText();
             String userType = userTypeComboBox.getSelectedItem();
-            if (userTypeComboBox.getSelectedItem().equals("Customer")) {
-                Client c = new Client(username, password);
-                ServiceClient.getInstance().login(c);
+            if (Email.getText().length() == 0 || Password.getText().length() == 0) {
+                Dialog.show("Alert", "All fields are required", new Command("OK"));
+            } else {
+                if (userTypeComboBox.getSelectedItem().equals("Customer")) {
+                    Client c = new Client(username, password);
+                    ServiceClient.getInstance().login(c);
 
-                ProfilClForm clientForm = new ProfilClForm(res, previous);
-                clientForm.show();
-            } else if (userTypeComboBox.getSelectedItem().equals("Landlord")) {
-                Locateur loc = new Locateur(username, password);
-                Locateur loc2 =ServiceLocateur.getInstance().login(loc);
+                    ProfilClForm clientForm = new ProfilClForm(res, previous);
+                    clientForm.show();
+                } else if (userTypeComboBox.getSelectedItem().equals("Landlord")) {
+                    Locateur loc = new Locateur(username, password);
+                    ServiceLocateur.getInstance().login(loc);
 
-                ProfilLocForm locForm = new ProfilLocForm(res, previous);
-                locForm.show();
-            } else if (userTypeComboBox.getSelectedItem().equals("Driver")) {
-                Chauffeur ch = new Chauffeur(username, password);
-                ServiceChauffeur.getInstance().login(ch);
+                    ProfilLocForm locForm = new ProfilLocForm(res, previous);
+                    locForm.show();
+                } else if (userTypeComboBox.getSelectedItem().equals("Driver")) {
+                    Chauffeur ch = new Chauffeur(username, password);
+                    ServiceChauffeur.getInstance().login(ch);
 
-                ProfilChForm chForm = new ProfilChForm(res, previous);
-                chForm.show();
+                    ProfilChForm chForm = new ProfilChForm(res, previous);
+                    chForm.show();
+                }
             }
         });
         mp.addActionListener(e -> {
-            ChoixResetRoleForm choix =new ChoixResetRoleForm(res, previous);
+            ChoixResetRoleForm choix = new ChoixResetRoleForm(res, previous);
             choix.show();
 
         });

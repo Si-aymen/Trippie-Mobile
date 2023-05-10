@@ -40,7 +40,7 @@ public class AddCarChauffeurForm extends Form {
 
         TextField tfnmbreplace = new TextField("", "nbmre de palce");
 
-        Button btnValider = new Button("Add task");
+        Button btnValider = new Button("Add");
 
         btnValider.addActionListener(new ActionListener() {
             @Override

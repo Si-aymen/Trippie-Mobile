@@ -47,7 +47,7 @@ public class ProfilChForm extends BaseForm {
 
         getContentPane().setScrollVisible(true);
         super.addSideMenu(res);
-        tb.addMaterialCommandToSideMenu("Car Pool", FontImage.MATERIAL_EXIT_TO_APP, e -> {
+        tb.addMaterialCommandToSideMenu("Car Pool", FontImage.MATERIAL_DIRECTIONS_CAR, e -> {
             new ListCo_voiturageform(this).show();
             //System.out.println(SessionManager.getUserName());
         });

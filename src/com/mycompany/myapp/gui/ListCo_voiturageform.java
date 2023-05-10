@@ -23,7 +23,7 @@ public class ListCo_voiturageform extends Form {
         addGUIs();
 
         super.getToolbar().addMaterialCommandToLeftBar("  ", FontImage.MATERIAL_ARROW_BACK, e -> previous.showBack());
-        super.getToolbar().addMaterialCommandToRightBar("", FontImage.MATERIAL_ARROW_BACK, e -> new AddCarChauffeurForm(previous).show());
+        super.getToolbar().addMaterialCommandToRightBar("", FontImage.MATERIAL_ADD, e -> new AddCarChauffeurForm(previous).show());
     }
 
     public void refresh() {

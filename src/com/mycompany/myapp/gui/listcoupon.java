@@ -11,7 +11,6 @@ import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.util.UIBuilder;
 import com.mycompany.myapp.entities.Coupon;
 import com.mycompany.myapp.services.ServiceCoupon;
-import static java.time.temporal.TemporalAdjusters.previous;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;

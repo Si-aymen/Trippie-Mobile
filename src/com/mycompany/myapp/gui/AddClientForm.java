@@ -27,16 +27,16 @@ public class AddClientForm extends BaseForm {
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         tb.setUIID("Container");
-         setUIID("Activate");
+        setUIID("Activate");
         // getTitleArea().setUIID("Container");
         //Form previous = Display.getInstance().getCurrent();
         //tb.setBackCommand("", e -> previous.showBack());
-       
+
         TextField tfgsm = new TextField("", "gsm");
         TextField img = new TextField("", "img");
-        TextField tfemail = new TextField("", "email");
-        TextField tfpass = new TextField("", "password");
-      
+        TextField tfemail = new TextField("", "Email", 20, TextField.EMAILADDR);
+        TextField tfpass = new TextField("", "Password", 20, TextField.PASSWORD);
+       
         Button btnValider = new Button("Add");
 
         tfgsm.setSingleLineTextArea(false);
@@ -61,13 +61,14 @@ public class AddClientForm extends BaseForm {
         add(BorderLayout.SOUTH, BoxLayout.encloseY(
                 FlowLayout.encloseCenter(btnValider)
         ));
-       
 
         btnValider.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                if (tfgsm.getText().length() == 0) {
-                    Dialog.show("Alert", "Please select a role", new Command("OK"));
+                if (tfgsm.getText().length() == 0 || img.getText().length() == 0 || tfemail.getText().length() == 0 || tfpass.getText().length() == 0) {
+                    Dialog.show("Alert", "All fields are required", new Command("OK"));
+                } else if (tfgsm.getText().length() != 8) {
+                    Dialog.show("Alert", "GSM must contain 8 numbers", new Command("OK"));
                 } else {
                     // Use tfgsm.getText() to get the file path
                     Client c = new Client(Integer.parseInt(tfgsm.getText()), tfemail.getText().toString(), tfpass.getText().toString(), img.getText().toString());

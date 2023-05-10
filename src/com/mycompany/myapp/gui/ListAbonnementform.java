@@ -1,6 +1,5 @@
 package com.mycompany.myapp.gui;
 
-
 import com.codename1.components.*;
 import com.codename1.ui.*;
 import com.codename1.ui.layouts.*;
@@ -16,10 +15,12 @@ public class ListAbonnementform extends Form {
     Button addBtn;
 
     public ListAbonnementform(Form previous) {
- setUIID("Activate");
+        setUIID("Activate");
         this.previous = previous;
         setTitle("list Abonnement");
         setLayout(BoxLayout.y());
+        super.getToolbar().addMaterialCommandToLeftBar("  ", FontImage.MATERIAL_ARROW_BACK, e -> previous.showBack());
+        super.getToolbar().addMaterialCommandToRightBar("", FontImage.MATERIAL_ADD, e -> new addabonnement(previous).show());
 
         addGUIs();
 
@@ -56,8 +57,6 @@ public class ListAbonnementform extends Form {
 
         prix = new Label("Price : " + v.getPrix());
         prix.setUIID("labelDefault");
-
-       
 
         AbonnementModel.addAll(
                 type, prix
@@ -97,7 +96,7 @@ public class ListAbonnementform extends Form {
 
             btnConfirm.addActionListener(actionConf -> {
 
-             ServiceAbonnement.getInstance().delete(v.getIdA());
+                ServiceAbonnement.getInstance().delete(v.getIdA());
                 new ListAbonnementform(previous).show();
             });
 

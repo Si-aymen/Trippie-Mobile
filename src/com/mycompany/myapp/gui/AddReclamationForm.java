@@ -34,7 +34,7 @@ public class AddReclamationForm extends Form {
         TextField tfdate_creation = new TextField("", "dare creation");
         TextField tfimage = new TextField("", "picture");
 
-        Button btnValider = new Button("Add task");
+        Button btnValider = new Button("Add Reclamation");
 
         btnValider.addActionListener(new ActionListener() {
             @Override

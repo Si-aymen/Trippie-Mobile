@@ -75,7 +75,7 @@ public class ServiceLocateur {
         return resultOK;
     }
 
-    public Locateur login(Locateur c) {
+    public void login(Locateur c) {
         // construire l'URL de la requête
         String email = c.getEmail();
         String password = c.getPassword();
@@ -128,7 +128,7 @@ public class ServiceLocateur {
         // envoyer la requête
         NetworkManager.getInstance()
                 .addToQueueAndWait(req);
-        return role;
+        
     }
     
        public boolean deleteLoc(int id_loc) {

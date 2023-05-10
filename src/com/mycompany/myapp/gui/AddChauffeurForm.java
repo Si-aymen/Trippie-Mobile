@@ -20,18 +20,22 @@ public class AddChauffeurForm extends BaseForm {
         TextField tfperm = new TextField("", "Driving Liscence");
         TextField tfimg = new TextField("", "Img");
         TextField tfgsm = new TextField("", "gsm");
-        TextField tfemail = new TextField("", "email");
-        TextField tfpass = new TextField("", "password");
- setUIID("Activate");
+        TextField tfemail = new TextField("", "Email", 20, TextField.EMAILADDR);
+        TextField tfpass = new TextField("", "Password", 20, TextField.PASSWORD);
+        setUIID("Activate");
+        
         Button btnValider = new Button("Add");
-
+       
         btnValider.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                if (tfimg.getText().length() == 0) {
-                    Dialog.show("Alert", "Please select a role", new Command("OK"));
-                } else {
-                    Chauffeur c = new Chauffeur(Integer.parseInt(tfgsm.getText()),tfperm.getText().toString(), tfemail.getText().toString(), tfpass.getText().toString(), tfimg.getText().toString());
+                if (tfgsm.getText().length() == 0 || tfimg.getText().length() == 0 || tfemail.getText().length() == 0 || tfpass.getText().length() == 0 || tfperm.getText().length() == 0) {
+                    Dialog.show("Alert", "All fields are required", new Command("OK"));
+                } else if (tfgsm.getText().length() != 8) {
+                    Dialog.show("Alert", "GSM must contain 8 numbers", new Command("OK"));
+                } 
+                else {
+                    Chauffeur c = new Chauffeur(Integer.parseInt(tfgsm.getText()), tfperm.getText().toString(), tfemail.getText().toString(), tfpass.getText().toString(), tfimg.getText().toString());
                     boolean success = ServiceChauffeur.getInstance().addChauffeurJSON(r, c);
 
                     if (success) {
@@ -45,7 +49,7 @@ public class AddChauffeurForm extends BaseForm {
             }
         });
 
-        addAll(tfimg,tfperm, tfgsm, tfemail, tfpass, btnValider);
+        addAll(tfimg, tfperm, tfgsm, tfemail, tfpass, btnValider);
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> previous.showBack());
     }
 }

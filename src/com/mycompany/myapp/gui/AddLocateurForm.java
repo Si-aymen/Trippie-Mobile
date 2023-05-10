@@ -20,18 +20,23 @@ public class AddLocateurForm extends BaseForm {
         TextField tfagence = new TextField("", "Agencey name");
         TextField tfimg = new TextField("", "Img");
         TextField tfgsm = new TextField("", "gsm");
-        TextField tfemail = new TextField("", "email");
-        TextField tfpass = new TextField("", "password");
- setUIID("Activate");
+        TextField tfemail = new TextField("", "Email", 20, TextField.EMAILADDR);
+        TextField tfpass = new TextField("", "Password", 20, TextField.PASSWORD);
+        String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+
+        setUIID("Activate");
         Button btnValider = new Button("Add");
 
         btnValider.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                if (tfimg.getText().length() == 0) {
-                    Dialog.show("Alert", "Please select a role", new Command("OK"));
-                } else {
-                    Locateur c = new Locateur(Integer.parseInt(tfgsm.getText()),tfagence.getText().toString(), tfemail.getText().toString(), tfpass.getText().toString(), tfimg.getText().toString());
+                if (tfgsm.getText().length() == 0 || tfimg.getText().length() == 0 || tfemail.getText().length() == 0 || tfpass.getText().length() == 0 || tfagence.getText().length() == 0) {
+                    Dialog.show("Alert", "All fields are required", new Command("OK"));
+                } else if (tfgsm.getText().length() != 8) {
+                    Dialog.show("Alert", "GSM must contain 8 numbers", new Command("OK"));
+                } 
+                else {
+                    Locateur c = new Locateur(Integer.parseInt(tfgsm.getText()), tfagence.getText().toString(), tfemail.getText().toString(), tfpass.getText().toString(), tfimg.getText().toString());
                     boolean success = ServiceLocateur.getInstance().addLocateurJSON(r, c);
 
                     if (success) {
@@ -45,7 +50,7 @@ public class AddLocateurForm extends BaseForm {
             }
         });
 
-        addAll(tfimg,tfagence, tfgsm, tfemail, tfpass, btnValider);
+        addAll(tfimg, tfagence, tfgsm, tfemail, tfpass, btnValider);
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> previous.showBack());
     }
 }

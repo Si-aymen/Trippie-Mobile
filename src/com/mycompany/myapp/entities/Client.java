@@ -22,6 +22,13 @@ public class Client {
         this.img = img;
     }
 
+    public Client(int id_client) {
+        this.id_client = id_client;
+    }
+
+    public Client() {
+    }
+
     public Client(String email, String password) {
         this.email = email;
         this.password = password;

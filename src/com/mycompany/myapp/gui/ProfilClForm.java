@@ -49,15 +49,15 @@ public class ProfilClForm extends BaseForm {
         cl_id = SessionManagerClient.getId();
         getContentPane().setScrollVisible(true);
         super.addSideMenu(res);
-        tb.addMaterialCommandToSideMenu("Reclamation", FontImage.MATERIAL_EXIT_TO_APP, e -> {
+        tb.addMaterialCommandToSideMenu("Reclamation", FontImage.MATERIAL_EMAIL, e -> {
             new ListReclamationform(this).show();
             //System.out.println(SessionManager.getUserName());
         });
-        tb.addMaterialCommandToSideMenu("MembirShip", FontImage.MATERIAL_EXIT_TO_APP, e -> {
+        tb.addMaterialCommandToSideMenu("MembirShip", FontImage.MATERIAL_PERSON, e -> {
             new ListAbonnementform(this).show();
             //System.out.println(SessionManager.getUserName());
         });
-        tb.addMaterialCommandToSideMenu("Coupon", FontImage.MATERIAL_EXIT_TO_APP, e -> {
+        tb.addMaterialCommandToSideMenu("Coupon", FontImage.MATERIAL_CARD_GIFTCARD, e -> {
             new listcoupon(this).show();
             //System.out.println(SessionManager.getUserName());
         });

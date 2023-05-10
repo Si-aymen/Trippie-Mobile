@@ -32,7 +32,7 @@ public class ServiceReclamation {
     public boolean resultOK;
     private ConnectionRequest req, cr;
     public int resultCode;
-    static private int id_role;
+    private int id_client;
 
     private ServiceReclamation() {
         req = new ConnectionRequest();
@@ -46,10 +46,9 @@ public class ServiceReclamation {
     }
 
     public boolean addTask(Reclamation r) {
-        id_role = ProfilClForm.role_id;
+        id_client = ProfilClForm.cl_id;
         String url = Statics.BASE_URL + "/addReclamationSON/new?type=" + r.getType() + "&commentaire=" + r.getCommentaire() + "&etat=" + "non traite" + "&image=" + r.getImage()
-                + "&id_user=" + id_role;
-        System.out.println(id_role);
+                + "&id_client=" + id_client;
 
         req.setUrl(url);
         req.setPost(false);

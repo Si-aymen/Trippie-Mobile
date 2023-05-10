@@ -46,7 +46,7 @@ public class ProfilLocForm extends BaseForm {
         loc_id = SessionManagerLocateur.getId();
         getContentPane().setScrollVisible(true);
         super.addSideMenu(res);
-        tb.addMaterialCommandToSideMenu("Cars", FontImage.MATERIAL_EXIT_TO_APP, e -> {
+        tb.addMaterialCommandToSideMenu("Cars", FontImage.MATERIAL_DIRECTIONS_CAR, e -> {
             new ListVoitureform(this).show();
             //System.out.println(SessionManager.getUserName());
         });
