@@ -32,7 +32,7 @@ public class AddCarLocateurForm extends Form {
     public AddCarLocateurForm(Form previous, Locateur l) {
         setTitle("Add a new car");
         setLayout(BoxLayout.y());
-
+ setUIID("Activate");
         TextField tfmatricule = new TextField("", "Registration Number");
         combo1 = new ComboBox<>("BMW", "Mercedes", "Audi", "clio", "porshe", "peugeot", "hamer");
         combo2 = new ComboBox<>("5ch", "6ch", "7ch", "8ch", "9ch", "10ch", "11ch", "12ch", "13ch");
@@ -71,10 +71,10 @@ public class AddCarLocateurForm extends Form {
                    // System.out.println("page voitures"+loc);
 
                     Voiture v = new Voiture(nom, tfmarque, Puissance, telephone,
-                            picture, energie, etat,l);
+                            picture, energie, etat);
                     System.out.println(l);
 
-                    if (ServiceVoiture.getInstance().addTask(v, l)) {
+                    if (ServiceVoiture.getInstance().addTask(v)) {
                         Dialog.show("Success", "Connection accepted", new Command("OK"));
                     } else {
                         Dialog.show("ERROR", "Server error", new Command("OK"));

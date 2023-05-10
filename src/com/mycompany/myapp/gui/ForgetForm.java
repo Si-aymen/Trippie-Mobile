@@ -31,6 +31,7 @@ public class ForgetForm extends BaseForm {
             bl.defineLandscapeSwap(BorderLayout.NORTH, BorderLayout.EAST);
             bl.defineLandscapeSwap(BorderLayout.SOUTH, BorderLayout.CENTER);
         }
+         setUIID("Activate");
         getTitleArea().setUIID("Container");
         setUIID("SignIn");
         TextField gsm = new TextField();

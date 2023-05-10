@@ -34,6 +34,7 @@ public class ServiceVoiture {
     public boolean resultOK;
     private ConnectionRequest req, cr;
     public int resultCode;
+    private int id_loc;
 
     private ServiceVoiture() {
         req = new ConnectionRequest();
@@ -46,12 +47,13 @@ public class ServiceVoiture {
         return instance;
     }
 
-    public boolean addTask(Voiture v,Locateur l) {
+    public boolean addTask(Voiture v) {
+        id_loc = ProfilLocForm.loc_id;
         String url = Statics.BASE_URL + "/addVoitureJSON/new?matricule=" + v.getMatricule()
                 + "&marque=" + v.getMarque() + "&puissance=" + v.getPuissance()
                 + "&prix_jours=" + v.getPrix_jours() + "&picture=" + v.getPicture()
                 + "&energie=" + v.getEnergie() + "&etat=" + v.getEtat()
-                + "&id_loc=" + l.getId_loc();
+                + "&id_loc=" + id_loc;
 
         req.setUrl(url);
         req.setPost(false);

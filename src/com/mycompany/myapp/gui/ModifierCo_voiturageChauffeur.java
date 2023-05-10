@@ -21,8 +21,8 @@ public class ModifierCo_voiturageChauffeur extends Form {
     private ComboBox<String> combo3;
 
     public ModifierCo_voiturageChauffeur(Form previous, Cov v) {
-
-       setTitle("update car");
+        setUIID("Activate");
+        setTitle("update car");
         setLayout(BoxLayout.y());
 
         this.previous = previous;
@@ -30,10 +30,9 @@ public class ModifierCo_voiturageChauffeur extends Form {
 
         combo2 = new ComboBox<>("", "Aryanah", "Bizerte", "Beja", "Tunis", "Sfax", "Kairouan", "Jandouba", "Ben Arous", "Manouba", "Nabeul", "Zaghouan");
 
-        TextField depart  = new TextField(v.getDepart(), " depart");
+        TextField depart = new TextField(v.getDepart(), " depart");
         TextField destination = new TextField(v.getDestination(), "destination");
         //TextField nmbr_place = new TextField(v.getNbre_place() , "number of seats ");
-
 
         Button btnModifier = new Button("Edit");
         Button btnAnnuler = new Button("Cancel");
@@ -47,7 +46,6 @@ public class ModifierCo_voiturageChauffeur extends Form {
                 v.setDepart(selectedDepart);
                 String selectDestination = (String) combo2.getSelectedItem();
                 v.setDestination(selectDestination);
-
 
                 try {
                     if (ServiceCov.getInstance().modifier(v)) {
@@ -67,7 +65,7 @@ public class ModifierCo_voiturageChauffeur extends Form {
             new ListCo_voiturageform(previous).show();
         });
 
-        addAll(combo1, combo2,  btnAnnuler, btnModifier);
+        addAll(combo1, combo2, btnAnnuler, btnModifier);
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> previous.showBack());
 
     }

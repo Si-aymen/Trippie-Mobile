@@ -33,14 +33,15 @@ import com.mycompany.myapp.services.ServiceChauffeur;
  * @author aymen
  */
 public class ProfilChForm extends BaseForm {
-    public static int ch_id ; 
+
+    public static int ch_id;
 
     public ProfilChForm(Resources res, Form previous) {
         super("Profil", BoxLayout.y());
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
-
-        ch_id = SessionManagerChauffeur.getId(); 
+        setUIID("Activate");
+        ch_id = SessionManagerChauffeur.getId();
         getTitleArea().setUIID("Container");
         setTitle("Profile");
 

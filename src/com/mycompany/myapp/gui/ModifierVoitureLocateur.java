@@ -18,20 +18,17 @@ public class ModifierVoitureLocateur extends Form {
     private Form previous;
     private ComboBox<String> combo1;
     private ComboBox<String> combo2;
-  
 
     public ModifierVoitureLocateur(Form previous, Voiture v) {
-
+        setUIID("Activate");
         setTitle("update car");
         setLayout(BoxLayout.y());
 
         this.previous = previous;
         combo1 = new ComboBox<>("BMW", "Mercedes", "Audi", "clio", "porshe", "peugeot", "hamer");
         combo2 = new ComboBox<>("5ch", "6ch", "7ch", "8ch", "9ch", "10ch", "11ch", "12ch", "13ch");
-       
 
         TextField matricule = new TextField(v.getMatricule(), "Registration number");
-       
 
         Button btnModifier = new Button("Edit");
         Button btnAnnuler = new Button("Cancel");
@@ -45,7 +42,6 @@ public class ModifierVoitureLocateur extends Form {
                 v.setMarque(selectedMarque);
                 String selectedpower = (String) combo2.getSelectedItem();
                 v.setMarque(selectedpower);
-                
 
                 try {
                     if (ServiceVoiture.getInstance().modifier(v)) {

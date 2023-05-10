@@ -27,10 +27,11 @@ public class AddClientForm extends BaseForm {
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         tb.setUIID("Container");
+         setUIID("Activate");
         // getTitleArea().setUIID("Container");
         //Form previous = Display.getInstance().getCurrent();
         //tb.setBackCommand("", e -> previous.showBack());
-        setUIID("SignIn");
+       
         TextField tfgsm = new TextField("", "gsm");
         TextField img = new TextField("", "img");
         TextField tfemail = new TextField("", "email");

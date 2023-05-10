@@ -34,20 +34,34 @@ import com.mycompany.myapp.services.ServiceClient;
  */
 public class ProfilClForm extends BaseForm {
 
+    public static int cl_id;
+    public static int role_id;
+
     public ProfilClForm(Resources res, Form previous) {
         super("Profil", BoxLayout.y());
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
-
+        setUIID("Activate");
         getTitleArea().setUIID("Container");
         setTitle("Profile");
-
+        role_id = SessionManagerClient.getIdRole();
+        System.out.println(role_id);
+        cl_id = SessionManagerClient.getId();
         getContentPane().setScrollVisible(true);
         super.addSideMenu(res);
-        tb.addMaterialCommandToSideMenu("Cars", FontImage.MATERIAL_EXIT_TO_APP, e -> {
-            new ListVoitureform(this).show();
+        tb.addMaterialCommandToSideMenu("Reclamation", FontImage.MATERIAL_EXIT_TO_APP, e -> {
+            new ListReclamationform(this).show();
             //System.out.println(SessionManager.getUserName());
         });
+        tb.addMaterialCommandToSideMenu("MembirShip", FontImage.MATERIAL_EXIT_TO_APP, e -> {
+            new ListAbonnementform(this).show();
+            //System.out.println(SessionManager.getUserName());
+        });
+        tb.addMaterialCommandToSideMenu("Coupon", FontImage.MATERIAL_EXIT_TO_APP, e -> {
+            new listcoupon(this).show();
+            //System.out.println(SessionManager.getUserName());
+        });
+
         tb.addSearchCommand(e -> {
         });
         Image img = res.getImage("profile-background.jpg");

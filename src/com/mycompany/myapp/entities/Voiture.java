@@ -15,13 +15,13 @@ public class Voiture implements Serializable {
 
     private int id;
     String matricule, marque, puissance, prix_jours, picture, energie, etat;
-    Locateur idlocateur;
+    int idlocateur;
 
-    public Locateur getIdlocateur() {
+    public int getIdlocateur() {
         return idlocateur;
     }
 
-    public void setIdlocateur(Locateur idlocateur) {
+    public void setIdlocateur(int idlocateur) {
         this.idlocateur = idlocateur;
     }
 
@@ -37,7 +37,7 @@ public class Voiture implements Serializable {
     
     }
 
-    public Voiture(String matricule, String marque, String puissance, String prix_jours, String picture, String energie, String etat, Locateur idlocateur) {
+    public Voiture(String matricule, String marque, String puissance, String prix_jours, String picture, String energie, String etat, int idlocateur) {
         this.matricule = matricule;
         this.marque = marque;
         this.puissance = puissance;

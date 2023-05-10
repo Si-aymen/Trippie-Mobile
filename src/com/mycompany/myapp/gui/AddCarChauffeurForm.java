@@ -24,7 +24,7 @@ import com.mycompany.myapp.services.ServiceCov;
  */
 public class AddCarChauffeurForm extends Form {
     
-    static int  id_chauff; 
+ //   static int  id_chauff; 
 
     private ComboBox<String> combo1;
     private ComboBox<String> combo2;
@@ -32,6 +32,7 @@ public class AddCarChauffeurForm extends Form {
     public AddCarChauffeurForm(Form previous) {
         setTitle("Add a new car");
         setLayout(BoxLayout.y());
+         setUIID("Activate");
 
         combo1 = new ComboBox<>("", "Aryanah", "Bizerte", "Beja", "Tunis", "Sfax", "Kairouan", "Jandouba", "Ben Arous", "Manouba", "Nabeul", "Zaghouan");
 

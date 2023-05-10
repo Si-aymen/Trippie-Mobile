@@ -13,6 +13,7 @@ import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
 import com.codename1.ui.events.ActionListener;
 import com.mycompany.myapp.entities.Reclamation;
+import com.mycompany.myapp.gui.ProfilClForm;
 import com.mycompany.myapp.utils.Statics;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class ServiceReclamation {
     public boolean resultOK;
     private ConnectionRequest req, cr;
     public int resultCode;
+    static private int id_role;
 
     private ServiceReclamation() {
         req = new ConnectionRequest();
@@ -44,7 +46,10 @@ public class ServiceReclamation {
     }
 
     public boolean addTask(Reclamation r) {
-        String url = Statics.BASE_URL + "/addReclamationSON/new?type=" + r.getType() + "&commentaire=" + r.getCommentaire() + "&etat=" + "non traite" + "&image=" + r.getImage();
+        id_role = ProfilClForm.role_id;
+        String url = Statics.BASE_URL + "/addReclamationSON/new?type=" + r.getType() + "&commentaire=" + r.getCommentaire() + "&etat=" + "non traite" + "&image=" + r.getImage()
+                + "&id_user=" + id_role;
+        System.out.println(id_role);
 
         req.setUrl(url);
         req.setPost(false);
@@ -105,7 +110,7 @@ public class ServiceReclamation {
 //                r.setEtat((String) obj.get("etat").toString());
                 r.setType((String) obj.get("type").toString());
                 r.setCommentaire((String) obj.get("commentaire").toString());
-                  r.setId((int) id);
+                r.setId((int) id);
                 reclamations.add(r);
             }
         } catch (IOException e) {
@@ -113,10 +118,10 @@ public class ServiceReclamation {
         }
         return reclamations;
     }
-    
+
     public int delete(int id) {
         cr = new ConnectionRequest();
-        cr.setUrl(Statics.BASE_URL + "/deleteReclamationJSON/"+id);
+        cr.setUrl(Statics.BASE_URL + "/deleteReclamationJSON/" + id);
         System.out.println("url delete : " + cr);
         cr.setHttpMethod("POST");
         // cr.addArgument("id", String.valueOf(id));
@@ -136,14 +141,14 @@ public class ServiceReclamation {
         }
         return cr.getResponseCode();
     }
-     public int edit(Reclamation r) {
+
+    public int edit(Reclamation r) {
         return manage(r);
     }
 
     public boolean modifier(Reclamation r) {
 
-        String url = Statics.BASE_URL +" updateReclamationJSON/71?type=hello&commentaire=student.name@email.tn";
-      
+        String url = Statics.BASE_URL + " updateReclamationJSON/71?type=hello&commentaire=student.name@email.tn";
 
         req.setUrl(url);
 
@@ -165,8 +170,8 @@ public class ServiceReclamation {
         cr = new ConnectionRequest();
 
         cr.setHttpMethod("GET");
-        
-      cr.setUrl(Statics.BASE_URL +" updateReclamationJSON/71?type=hello&commentaire=student.name@email.tn");
+
+        cr.setUrl(Statics.BASE_URL + " updateReclamationJSON/71?type=hello&commentaire=student.name@email.tn");
 
         cr.addArgument("id", String.valueOf(r.getId()));
         cr.addResponseListener(new ActionListener<NetworkEvent>() {
@@ -184,7 +189,5 @@ public class ServiceReclamation {
         }
         return resultCode;
     }
-    
-    
-    
+
 }

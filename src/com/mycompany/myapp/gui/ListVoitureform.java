@@ -17,7 +17,7 @@ public class ListVoitureform extends Form {
     Locateur l;
 
     public ListVoitureform(Form previous) {
-
+        setUIID("Activate");
         this.previous = previous;
         setTitle("list car");
         setLayout(BoxLayout.y());
@@ -36,7 +36,7 @@ public class ListVoitureform extends Form {
     }
 
     private void addGUIs() {
-
+        setUIID("Activate");
         ArrayList<Voiture> listVoitures = ServiceVoiture.getInstance().getAll();
         if (listVoitures.size() > 0) {
             for (Voiture v : listVoitures) {
@@ -51,6 +51,7 @@ public class ListVoitureform extends Form {
     Label matricule, marque, puissance;
 
     private Container makeModelWithoutButtons(Voiture v) {
+        setUIID("Activate");
         Container voitureModel = new Container(new BoxLayout(BoxLayout.Y_AXIS));
         voitureModel.setUIID("containerRounded");
 
@@ -74,7 +75,7 @@ public class ListVoitureform extends Form {
     Container btnsContainer;
 
     private Component makeVoitureModel(Voiture v) {
-
+        setUIID("Activate");
         Container voitureModel = makeModelWithoutButtons(v);
 
         btnsContainer = new Container(new BorderLayout());

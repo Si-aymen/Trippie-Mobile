@@ -92,10 +92,7 @@ public class BaseForm extends Form {
             Storage.getInstance().clearCache();
             //System.out.println(SessionManager.getUserName());
         });
-        tb.addMaterialCommandToSideMenu("Reclamation", FontImage.MATERIAL_EXIT_TO_APP, e -> {
-            new ListReclamationform(this).show();
-            //System.out.println(SessionManager.getUserName());
-        });
+        
 
         refreshTheme();
     }

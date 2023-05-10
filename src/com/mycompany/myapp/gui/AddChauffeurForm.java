@@ -22,7 +22,7 @@ public class AddChauffeurForm extends BaseForm {
         TextField tfgsm = new TextField("", "gsm");
         TextField tfemail = new TextField("", "email");
         TextField tfpass = new TextField("", "password");
-
+ setUIID("Activate");
         Button btnValider = new Button("Add");
 
         btnValider.addActionListener(new ActionListener() {

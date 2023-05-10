@@ -26,6 +26,7 @@ public class ChoixResetRoleForm extends BaseForm {
         ComboBox<String> libelle = new ComboBox<>("Client", "Chauffeur", "Locateur");
         // addComponent(BorderLayout.CENTER, libelle);
         Button btnValider = new Button("Next");
+         setUIID("Activate");
         btnValider.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {

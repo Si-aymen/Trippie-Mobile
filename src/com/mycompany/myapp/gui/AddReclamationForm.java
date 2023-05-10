@@ -27,7 +27,7 @@ public class AddReclamationForm extends Form {
     public AddReclamationForm(Form previous) {
         setTitle("Add Reclamation");
         setLayout(BoxLayout.y());
-
+ setUIID("Activate");
         TextField tftype = new TextField("", "type");
         TextField tfcommentaire = new TextField("", "commentaire");
         TextField tfid_user = new TextField("", "user id");

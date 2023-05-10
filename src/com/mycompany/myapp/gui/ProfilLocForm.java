@@ -11,6 +11,7 @@ import com.codename1.ui.Button;
 import com.codename1.ui.Component;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
@@ -32,19 +33,23 @@ import java.io.IOException;
  * @author aymen
  */
 public class ProfilLocForm extends BaseForm {
-    
+
+    public static int loc_id;
 
     public ProfilLocForm(Resources res, Form previous) {
         super("Profil", BoxLayout.y());
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
-
+        setUIID("Activate");
         getTitleArea().setUIID("Container");
         setTitle("Profile");
-
+        loc_id = SessionManagerLocateur.getId();
         getContentPane().setScrollVisible(true);
         super.addSideMenu(res);
-
+        tb.addMaterialCommandToSideMenu("Cars", FontImage.MATERIAL_EXIT_TO_APP, e -> {
+            new ListVoitureform(this).show();
+            //System.out.println(SessionManager.getUserName());
+        });
         tb.addSearchCommand(e -> {
         });
         Image img = res.getImage("profile-background.jpg");
@@ -64,7 +69,7 @@ public class ProfilLocForm extends BaseForm {
                         )
                 )
         ));
-        
+
         //System.out.println("id locateu "+loc.getId_loc());
         Button modiff = new Button("Modifier");
         Button Supprimer = new Button("Supprimer");

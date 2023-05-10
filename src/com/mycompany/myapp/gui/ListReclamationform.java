@@ -15,7 +15,7 @@ public class ListReclamationform extends Form {
     Button addBtn;
 
     public ListReclamationform(Form previous) {
-
+        setUIID("Activate");
         this.previous = previous;
         setTitle("list car");
         setLayout(BoxLayout.y());
@@ -35,7 +35,7 @@ public class ListReclamationform extends Form {
     }
 
     private void addGUIs() {
-
+        setUIID("Activate");
         ArrayList<Reclamation> listReclamations = ServiceReclamation.getInstance().getAll();
         if (listReclamations.size() > 0) {
             for (Reclamation r : listReclamations) {
@@ -50,6 +50,7 @@ public class ListReclamationform extends Form {
     Label etat, commentaire, type;
 
     private Container makeModelWithoutButtons(Reclamation r) {
+        setUIID("Activate");
         Container voitureModel = new Container(new BoxLayout(BoxLayout.Y_AXIS));
         voitureModel.setUIID("containerRounded");
 
@@ -73,7 +74,7 @@ public class ListReclamationform extends Form {
     Container btnsContainer;
 
     private Component makeVoitureModel(Reclamation r) {
-
+        setUIID("Activate");
         Container voitureModel = makeModelWithoutButtons(r);
 
         btnsContainer = new Container(new BorderLayout());

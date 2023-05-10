@@ -15,7 +15,7 @@ public class ListCo_voiturageform extends Form {
     Button addBtn;
 
     public ListCo_voiturageform(Form previous) {
-
+        setUIID("Activate");
         this.previous = previous;
         setTitle("list car Pool");
         setLayout(BoxLayout.y());
@@ -34,7 +34,7 @@ public class ListCo_voiturageform extends Form {
     }
 
     private void addGUIs() {
-
+        setUIID("Activate");
         ArrayList<Cov> listVoitures = ServiceCov.getInstance().getAll();
         if (listVoitures.size() > 0) {
             for (Cov v : listVoitures) {
@@ -49,6 +49,7 @@ public class ListCo_voiturageform extends Form {
     Label depart, destination, nmbr_place, sep;
 
     private Container makeModelWithoutButtons(Cov v) {
+        setUIID("Activate");
         Container voitureModel = new Container(new BoxLayout(BoxLayout.Y_AXIS));
         voitureModel.setUIID("containerRounded");
 
@@ -75,7 +76,7 @@ public class ListCo_voiturageform extends Form {
     Container btnsContainer;
 
     private Component makeVoitureModel(Cov v) {
-
+        setUIID("Activate");
         Container voitureModel = makeModelWithoutButtons(v);
 
         btnsContainer = new Container(new BorderLayout());

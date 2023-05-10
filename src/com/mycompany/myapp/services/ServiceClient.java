@@ -107,9 +107,11 @@ public class ServiceClient {
                         System.out.println(id_client);
 
                         int gsm = ((Double) response.get("gsm")).intValue();
+                     
                         System.out.println(gsm);
                         // float id = Float.parseFloat(client.get("id_client").toString());
                         // SessionManager.setId((int) id);
+                        
                         SessionManagerClient.setId(id_client);
                         SessionManagerClient.setGsm(gsm);
                         SessionManagerClient.setPhoto(img);
