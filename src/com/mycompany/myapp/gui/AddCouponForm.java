@@ -65,18 +65,11 @@ public class AddCouponForm extends Form {
     int nbrUtilisation = Integer.parseInt(tfNbrUtilisation.getText().trim());
     String type = tfType.getText().trim();
 
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     String dateDebut= "";
     String dateExpiration="";
     
-//    try {
-//        dateDebut = dateFormat.parse(dateDebutString);
-//        dateExpiration = dateFormat.parse(dateExpirationString);
-//    } catch (ParseException e) {
-//        // Handle the parsing exception
-//        e.printStackTrace();
-//        return;
-//    }
+
 
     Coupon coupon = new Coupon(dateDebut, dateExpiration, taux, codeCoupon, nbrUtilisation, type);
 

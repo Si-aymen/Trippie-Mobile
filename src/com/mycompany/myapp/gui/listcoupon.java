@@ -6,6 +6,7 @@ import com.codename1.ui.Button;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
+import com.codename1.ui.TextField;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.util.UIBuilder;
 import com.mycompany.myapp.entities.Coupon;
@@ -25,6 +26,45 @@ public class listcoupon extends Form {
 //        sp.setText(ServiceStation.getInstance().getAllStations().toString());
 //        add(sp);
 
+TextField searchField = new TextField("", "Nom de l'événement");
+Button searchButton = new Button("Rechercher");
+add(searchField);
+add(searchButton);
+searchButton.addActionListener(e -> {
+    String searchText = searchField.getText();
+    ArrayList<Coupon> filteredEvents = new ArrayList<>();
+ArrayList<Coupon> tasks1 = ServiceCoupon.getInstance().getAllStations();
+    for (Coupon ev : tasks1) {
+        if (ev.getCode_coupon().toLowerCase().contains(searchText.toLowerCase())) {
+            filteredEvents.add(ev);
+        }
+    }
+
+    // Create a new form to display the search results
+    Form searchResultsForm = new Form("Résultats de recherche", new BoxLayout(BoxLayout.Y_AXIS));
+
+    if (filteredEvents.isEmpty()) {
+        searchResultsForm.add(new Label("Aucun événement trouvé"));
+    } else {
+      for (Coupon ev : filteredEvents) {
+    // Add the event details to the form
+    Label nameLabel = new Label("Code coupon : " + ev.getCode_coupon());
+    Label locationLabel = new Label("type : " + ev.getType());
+    Label availablePlacesLabel = new Label("nbr : " + ev.getNbr_utilisation());
+
+    // Add the labels to the form
+    searchResultsForm.add(nameLabel);
+    searchResultsForm.add(locationLabel);
+    searchResultsForm.add(availablePlacesLabel);
+}
+
+    }
+
+    // Show the search results form
+    searchResultsForm.show();
+});
+
+
         Button btnValider = new Button("Ajouter un coupon");
         //btnValider.setUIID("LoginButton");
         btnValider.addActionListener(e -> {
@@ -37,10 +77,13 @@ public class listcoupon extends Form {
         for (Coupon t : tasks) {
             addElement(t);
             add(new Label(" "));
+            
         }  
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> previeus.showBack());
-    
+        
+
     }
+   
     public void addElement(Coupon task) {
         
         MultiButton sp = new MultiButton(task.getType());
